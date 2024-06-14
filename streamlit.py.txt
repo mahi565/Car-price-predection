@@ -1,0 +1,63 @@
+!pip install streamlit
+!pip install pyngrok
+
+import streamlit as st
+import numpy as np
+import pandas as pd
+import joblib
+
+# Load the model and scaler
+model = joblib.load('car_price_model.pkl')
+scaler = joblib.load('scaler.pkl')
+
+# Define a function for prediction
+def predict_car_price(features):
+    features = np.array(features).reshape(1, -1)
+    features_scaled = scaler.transform(features)
+    prediction = model.predict(features_scaled)
+    return prediction[0]
+
+# Streamlit app
+st.title('Car Price Prediction')
+
+# Collect user input
+symboling = st.selectbox('Symboling', [0, 1, 2, 3])
+normalized_losses = st.slider('Normalized Losses', 50, 300)
+make = st.selectbox('Make', ['audi', 'bmw', 'chevrolet', 'dodge', 'honda', 'isuzu', 'jaguar', 'mazda', 'mercedes', 'mitsubishi', 'nissan', 'peugot', 'plymouth', 'porsche', 'renault', 'saab', 'subaru', 'toyota', 'volkswagen', 'volvo'])
+fuel_type = st.selectbox('Fuel Type', ['gas', 'diesel'])
+aspiration = st.selectbox('Aspiration', ['std', 'turbo'])
+num_of_doors = st.selectbox('Number of Doors', ['two', 'four'])
+body_style = st.selectbox('Body Style', ['convertible', 'hatchback', 'sedan', 'wagon'])
+drive_wheels = st.selectbox('Drive Wheels', ['4wd', 'fwd', 'rwd'])
+engine_location = st.selectbox('Engine Location', ['front', 'rear'])
+wheel_base = st.slider('Wheel Base', 86.6, 120.9)
+length = st.slider('Length', 141.1, 208.1)
+width = st.slider('Width', 60.3, 72.3)
+height = st.slider('Height', 47.8, 59.8)
+curb_weight = st.slider('Curb Weight', 1488, 4066)
+engine_type = st.selectbox('Engine Type', ['dohc', 'dohcv', 'l', 'ohc', 'ohcf', 'ohcv', 'rotor'])
+num_of_cylinders = st.selectbox('Number of Cylinders', ['two', 'three', 'four', 'five', 'six', 'eight', 'twelve'])
+engine_size = st.slider('Engine Size', 61, 326)
+fuel_system = st.selectbox('Fuel System', ['1bbl', '2bbl', '4bbl', 'idi', 'mfi', 'mpfi', 'spdi', 'spfi'])
+bore = st.slider('Bore', 2.54, 3.94)
+stroke = st.slider('Stroke', 2.07, 4.17)
+compression_ratio = st.slider('Compression Ratio', 7.0, 23.0)
+horsepower = st.slider('Horsepower', 48, 288)
+peak_rpm = st.slider('Peak RPM', 4150, 6600)
+city_mpg = st.slider('City MPG', 13, 49)
+highway_mpg = st.slider('Highway MPG', 16, 54)
+
+# Prepare the feature vector for prediction
+features = [symboling, normalized_losses, make, fuel_type, aspiration, num_of_doors, body_style, drive_wheels, engine_location, wheel_base, length, width, height, curb_weight, engine_type, num_of_cylinders, engine_size, fuel_system, bore, stroke, compression_ratio, horsepower, peak_rpm, city_mpg, highway_mpg]
+
+# Make prediction
+if st.button('Predict Price'):
+    price = predict_car_price(features)
+    st.write(f'The predicted price of the car is: ${price:.2f}')
+
+from pyngrok import ngrok
+
+!streamlit run app.py &>/dev/null&
+
+public_url = get_ngrok_url()
+print(f"Public URL: {public_url}")

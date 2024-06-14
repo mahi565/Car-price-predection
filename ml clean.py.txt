@@ -1,0 +1,47 @@
+# Display the cleaned data
+print(df.head())
+
+# Define features (X) and target (y)
+X = df.drop('price', axis=1)
+y = df['price']
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Standardize the features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Initialize and train the linear regression model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Predict on the test set
+y_pred = model.predict(X_test)
+
+# Calculate and print evaluation metrics
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f'Mean Squared Error: {mse}')
+print(f'R^2 Score: {r2}')
+
+# Plotting the results
+plt.scatter(y_test, y_pred)
+plt.xlabel('Actual Prices')
+plt.ylabel('Predicted Prices')
+plt.title('Actual vs Predicted Prices')
+plt.show()
+
+# Save the model and scaler
+joblib.dump(model, 'car_price_model.pkl')
+joblib.dump(scaler, 'scaler.pkl')
+
+# Load the model and scaler
+loaded_model = joblib.load('car_price_model.pkl')
+loaded_scaler = joblib.load('scaler.pkl')
+
+# Predict using the loaded model and scaler
+X_new = loaded_scaler.transform(X_test)
+y_new_pred = loaded_model.predict(X_new)
