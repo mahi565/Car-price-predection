@@ -17,7 +17,7 @@ symboling,normalized-losses,make,fuel-type,aspiration,num-of-doors,body-style,dr
 0,?,bmw,gas,std,four,sedan,rwd,front,103.5,189,66.9,55.7,3230,ohc,six,209,mpfi,3.62,3.39,8,182,5400,16,22,30760
 0,?,bmw,gas,std,two,sedan,rwd,front,103.5,193.8,67.9,53.7,3380,ohc,six,209,mpfi,3.62,3.39,8,182,5400,16,22,41315
 0,?,bmw,gas,std,four,sedan,rwd,front,110,197,70.9,56.3,3505,ohc,six,209,mpfi,3.62,3.39,8,182,5400,15,20,36880
-2,121,chevrolet,gas,std,two,hatchback,fwd,front,88.4,141.1,60.3,53.2,1488,l,three,61,2bbl,2.91,3.03,9.5,48,5100,47,53,5151
+2,121,chevrolet,gas,std,two,hatchback,fwd,front,88.4,141.1,60.3,53.2,1488,l,three,61,2bbl,2.91,3.03,9.5,48,5100,47,53,5152
 1,98,chevrolet,gas,std,two,hatchback,fwd,front,94.5,155.9,63.6,52,1874,ohc,four,90,2bbl,3.03,3.11,9.6,70,5400,38,43,6295
 0,81,chevrolet,gas,std,four,sedan,fwd,front,94.5,158.8,63.6,52,1909,ohc,four,90,2bbl,3.03,3.11,9.6,70,5400,38,43,6575
 1,118,dodge,gas,std,two,hatchback,fwd,front,93.7,157.3,63.8,50.8,1876,ohc,four,90,2bbl,2.97,3.23,9.41,68,5500,37,41,5572
